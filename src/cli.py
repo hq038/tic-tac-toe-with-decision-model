@@ -1,12 +1,6 @@
 """Command-line interface for the application."""
 
-import argparse
-from collections.abc import Sequence
-
-from src import __version__
 from src.board import BOARD_SIZE, create_board, is_empty, place_mark, render_board
-
-PROG = "tic-tac-toe"
 
 
 def parse_move(raw: str) -> tuple[int, int] | None:
@@ -26,19 +20,8 @@ def parse_move(raw: str) -> tuple[int, int] | None:
     return column, row
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main() -> int:
     """Run the application."""
-    parser = argparse.ArgumentParser(
-        prog=PROG,
-        description="Tic-tac-toe game with an AI opponent.",
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version=f"%(prog)s {__version__}",
-    )
-    parser.parse_args(argv)
-
     board = create_board()
     print(render_board(board))
 
