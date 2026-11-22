@@ -1,5 +1,5 @@
-import tic_tac_toe_with_ai
+import src
 
 
 def test_package_imports() -> None:
-    assert tic_tac_toe_with_ai.__version__
+    assert src.__version__
