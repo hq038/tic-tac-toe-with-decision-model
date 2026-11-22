@@ -4,6 +4,7 @@ import argparse
 from collections.abc import Sequence
 
 from src import __version__
+from src.board import render_empty_board
 
 PROG = "tic-tac-toe"
 
@@ -21,5 +22,5 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.parse_args(argv)
 
-    print(f"{PROG} {__version__}: game not implemented yet")
+    print(render_empty_board())
     return 0
