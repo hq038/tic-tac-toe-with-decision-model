@@ -13,6 +13,14 @@ Tic-tac-toe game with an AI opponent.
 uv sync
 ```
 
+## Usage
+
+```bash
+uv run tic-tac-toe-with-ai
+# or
+uv run python -m src
+```
+
 ## Development
 
 ```bash

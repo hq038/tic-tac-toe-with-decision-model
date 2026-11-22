@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+tic-tac-toe-with-ai = "src.cli:main"
+
 [dependency-groups]
 dev = [
     "mypy>=1.11",
