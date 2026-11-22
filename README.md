@@ -16,7 +16,7 @@ uv sync
 ## Usage
 
 ```bash
-uv run tic-tac-toe-with-ai
+uv run tic-tac-toe
 # or
 uv run python -m src
 ```

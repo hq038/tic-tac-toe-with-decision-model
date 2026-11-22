@@ -5,7 +5,7 @@ from collections.abc import Sequence
 
 from src import __version__
 
-PROG = "tic-tac-toe-with-ai"
+PROG = "tic-tac-toe"
 
 
 def main(argv: Sequence[str] | None = None) -> int:
