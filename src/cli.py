@@ -10,8 +10,10 @@ from src.board import (
     render_board,
     winner,
 )
+from src.decision import choose_move
 
 PLAYERS = (("A", "X"), ("B", "O"))
+AI_PLAYER = "B"
 
 
 def parse_move(raw: str) -> tuple[int, int] | None:
@@ -56,7 +58,14 @@ def main() -> int:
     while True:
         player_name, mark = PLAYERS[turn % len(PLAYERS)]
 
-        column, row = prompt_move(board, player_name)
+        if player_name == AI_PLAYER:
+            move = choose_move(board, mark)
+            if move is None:
+                raise RuntimeError("The decision model did not return a move.")
+        else:
+            move = prompt_move(board, player_name)
+
+        column, row = move
         place_mark(board, column, row, mark)
         print(render_board(board))
 

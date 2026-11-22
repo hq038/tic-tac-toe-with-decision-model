@@ -23,10 +23,10 @@ uv run python -m src
 
 ## Decision model
 
-`src/decision.py` provides a client for OpenRouter's Jev decision model via the
-TypeSafe SDK. It is not wired into the game yet.
+Player A is human; player B is played by OpenRouter's Jev decision model via
+the TypeSafe SDK (`src/decision.py`).
 
-Set an OpenRouter API key before using it:
+Set an OpenRouter API key before playing:
 
 ```bash
 export OPENROUTER_API_KEY="your-api-key"
