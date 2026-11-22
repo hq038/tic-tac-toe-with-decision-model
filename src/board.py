@@ -22,6 +22,28 @@ def place_mark(board: Board, column: int, row: int, mark: str) -> None:
     board[row - 1][column - 1] = mark
 
 
+def is_full(board: Board) -> bool:
+    """Return whether every cell is taken."""
+    return all(cell != EMPTY_CELL for row in board for cell in row)
+
+
+def winner(board: Board) -> str | None:
+    """Return the mark with three in a row, or None if there is no winner."""
+    lines = [
+        *board,
+        *([board[row][column] for row in range(BOARD_SIZE)] for column in range(BOARD_SIZE)),
+        [board[index][index] for index in range(BOARD_SIZE)],
+        [board[index][BOARD_SIZE - 1 - index] for index in range(BOARD_SIZE)],
+    ]
+
+    for line in lines:
+        mark = line[0]
+        if mark != EMPTY_CELL and all(cell == mark for cell in line):
+            return mark
+
+    return None
+
+
 def render_board(board: Board) -> str:
     """Return the board as ASCII art."""
     lines = []

@@ -1,6 +1,17 @@
 """Command-line interface for the application."""
 
-from src.board import BOARD_SIZE, create_board, is_empty, place_mark, render_board
+from src.board import (
+    BOARD_SIZE,
+    Board,
+    create_board,
+    is_empty,
+    is_full,
+    place_mark,
+    render_board,
+    winner,
+)
+
+PLAYERS = (("A", "X"), ("B", "O"))
 
 
 def parse_move(raw: str) -> tuple[int, int] | None:
@@ -20,13 +31,10 @@ def parse_move(raw: str) -> tuple[int, int] | None:
     return column, row
 
 
-def main() -> int:
-    """Run the application."""
-    board = create_board()
-    print(render_board(board))
-
+def prompt_move(board: Board, player_name: str) -> tuple[int, int]:
+    """Prompt the player until an empty cell is chosen."""
     while True:
-        move = parse_move(input("Player A, choose a cell (column row): "))
+        move = parse_move(input(f"Player {player_name}, choose a cell (column row): "))
         if move is None:
             print("Invalid move. Enter a column and row from 1 to 3, e.g. '1 1'.")
             continue
@@ -36,8 +44,32 @@ def main() -> int:
             print("That cell is already taken. Choose another one.")
             continue
 
-        place_mark(board, column, row, "X")
-        break
+        return column, row
 
+
+def main() -> int:
+    """Run the application."""
+    board = create_board()
     print(render_board(board))
+
+    turn = 0
+    while True:
+        player_name, mark = PLAYERS[turn % len(PLAYERS)]
+
+        column, row = prompt_move(board, player_name)
+        place_mark(board, column, row, mark)
+        print(render_board(board))
+
+        winning_mark = winner(board)
+        if winning_mark is not None:
+            winner_name = next(name for name, player_mark in PLAYERS if player_mark == winning_mark)
+            print(f"Player {winner_name} wins!")
+            break
+
+        if is_full(board):
+            print("It's a draw!")
+            break
+
+        turn += 1
+
     return 0
