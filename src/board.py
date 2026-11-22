@@ -1,17 +1,18 @@
 """ASCII rendering for the tic-tac-toe board."""
 
-BOARD_ROWS = 3
-BOARD_COLUMNS = 3
+BOARD_SIZE = 3
+EMPTY_CELL = "   "
+ROW_DIVIDER = "---+---+---"
 
 
 def render_empty_board() -> str:
     """Return the empty 3x3 board as ASCII art."""
-    divider = "+" + "---+" * BOARD_COLUMNS
-    cell_row = "|" + "   |" * BOARD_COLUMNS
+    cell_row = "|".join([EMPTY_CELL] * BOARD_SIZE)
 
-    lines = [divider]
-    for _ in range(BOARD_ROWS):
+    lines = []
+    for row_index in range(BOARD_SIZE):
         lines.append(cell_row)
-        lines.append(divider)
+        if row_index < BOARD_SIZE - 1:
+            lines.append(ROW_DIVIDER)
 
     return "\n".join(lines)
