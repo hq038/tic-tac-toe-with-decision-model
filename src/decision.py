@@ -53,7 +53,7 @@ def choose_move(board: Board, mark: str) -> tuple[int, int] | None:
         "block that cell. "
         "Otherwise prefer the center, then corners, then sides. "
         f"Avoid any move that lets {opponent} create two winning threats (a fork) at once. "
-        "Among safe moves, prefer the one that creates the most winning threats for you."
+        "Among safe moves, prefer the one that creates the most winning threats for you, make no mistake."
     )
 
     with create_client() as client:
